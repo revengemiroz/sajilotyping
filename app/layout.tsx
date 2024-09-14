@@ -1,6 +1,7 @@
 import { Poppins } from "next/font/google";
 import type { Metadata } from "next";
 import "./globals.css";
+import { Toaster } from "@/components/ui/toaster";
 // import "react-transliterate/dist/index.css";
 
 const poppins = Poppins({
@@ -40,6 +41,7 @@ export default function RootLayout({
             />
           </div>
         </div>
+        <Toaster />
       </body>
     </html>
   );

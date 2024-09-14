@@ -11,11 +11,15 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ReactTransliterate } from "react-transliterate";
+import { useToast } from "@/hooks/use-toast";
 
 export default function Component() {
   const [inputText, setInputText] = useState("");
   const [translatedText, setTranslatedText] = useState("");
   const [showSpecialChars, setShowSpecialChars] = useState(false);
+
+  const { toast } = useToast();
+
   const handleTranslate = () => {
     const translatedContent = translateHindiToEnglish(inputText);
     setTranslatedText(translatedContent);
@@ -32,6 +36,10 @@ export default function Component() {
   };
   const handleCopyToClipboard = () => {
     navigator.clipboard.writeText(translatedText);
+    toast({
+      description: "Copied to clipboard",
+      className: "font-medium w-fit m-auto",
+    });
   };
   const handleSaveToFile = () => {
     const element = document.createElement("a");
@@ -152,6 +160,7 @@ export default function Component() {
           <div className="flex flex-col md:flex-row gap-2 justify-between">
             <Button
               onClick={handleCopyToClipboard}
+              disabled={translatedText.length === 0}
               className="w-full mb-2 md:mb-0"
             >
               <svg
@@ -171,7 +180,11 @@ export default function Component() {
               </svg>
               Copy
             </Button>
-            <Button onClick={handleSaveToFile} className="w-full">
+            <Button
+              onClick={handleSaveToFile}
+              disabled={translatedText.length === 0}
+              className="w-full"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
