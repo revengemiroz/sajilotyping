@@ -9,6 +9,7 @@ import { useState } from "react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function Component() {
   const [activeTab, setActiveTab] = useState("translate");
@@ -99,102 +100,98 @@ export default function Component() {
     setInputText((prevText) => prevText + char);
   };
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-background">
-      <div className="max-w-md w-full px-4 py-8 space-y-4 border rounded-md">
-        <h1 className="text-3xl font-bold text-foreground">
-          Hindi to English Translator
-        </h1>
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid grid-cols-2 gap-2">
-            <TabsTrigger value="translate">Translate</TabsTrigger>
-            <TabsTrigger value="transliterate">Transliterate</TabsTrigger>
-          </TabsList>
-          <TabsContent value="translate">
-            <Textarea
-              value={inputText}
-              onChange={(e) => setInputText(e.target.value)}
-              placeholder="Enter Hindi text here"
-              className="w-full p-4 rounded-md border border-input bg-background text-foreground"
-              rows={5}
-            />
-            <div className="flex flex-col md:flex-row justify-between">
-              <Button
-                onClick={handleTranslate}
-                className="w-full md:w-1/2 mr-2 mb-2 md:mb-0"
-              >
-                Translate
-              </Button>
-              <Button
-                onClick={handleCopyToClipboard}
-                className="w-full md:w-1/4 ml-2 mb-2 md:mb-0"
-              >
-                Copy
-              </Button>
-              <Button
-                onClick={handleSaveToFile}
-                className="w-full md:w-1/4 ml-2"
-              >
-                Save
-              </Button>
-            </div>
-          </TabsContent>
-          <TabsContent value="transliterate">
-            <Textarea
-              value={inputText}
-              onChange={(e) => setInputText(e.target.value)}
-              placeholder="Enter Hindi text here"
-              className="w-full p-4 rounded-md border border-input bg-background text-foreground"
-              rows={5}
-            />
-            <div className="flex flex-col md:flex-row justify-between">
-              <Button
-                onClick={handleTransliterate}
-                className="w-full md:w-1/2 mr-2 mb-2 md:mb-0"
-              >
-                Transliterate
-              </Button>
-              <Button
-                onClick={handleCopyToClipboard}
-                className="w-full md:w-1/4 ml-2 mb-2 md:mb-0"
-              >
-                Copy
-              </Button>
-              <Button
-                onClick={handleSaveToFile}
-                className="w-full md:w-1/4 ml-2"
-              >
-                Save
-              </Button>
-            </div>
-          </TabsContent>
-        </Tabs>
-        {translatedText && (
-          <div className="p-4 rounded-md border border-input bg-background text-foreground">
-            <h2 className="text-lg font-medium mb-2">Translated Text:</h2>
-            <p>{translatedText}</p>
+    <div className="flex flex-col items-center  min-h-screen ">
+      <nav className="py-10 w-full flex items-center justify-center">
+        <p className="text-foreground/90 font-bold tracking-tight text-4xl">
+          Sajilo Typing
+        </p>
+      </nav>
+      <div className="flex-1 w-full flex items-center justify-center">
+        <div className=" max-w-md w-full  flex-1 px-6 py-6 border shadow-sm rounded-lg flex flex-col bg-white h-fit space-y-4 ">
+          <h1 className="text-3xl font-bold text-foreground tracking-tight">
+            Hindi to English Translator
+          </h1>
+
+          <Textarea
+            value={inputText}
+            onChange={(e) => setInputText(e.target.value)}
+            placeholder="Enter Hindi text here"
+            className="w-full p-4 rounded-md border border-input bg-background text-foreground"
+            rows={5}
+          />
+          <div className="flex flex-col md:flex-row justify-between">
+            <Button
+              onClick={handleTranslate}
+              className="w-full md:w-1/2 mr-2 mb-2 md:mb-0"
+            >
+              Translate
+            </Button>
+            <Button
+              onClick={handleCopyToClipboard}
+              className="w-full md:w-1/4 ml-2 mb-2 md:mb-0"
+            >
+              Copy
+            </Button>
+            <Button onClick={handleSaveToFile} className="w-full md:w-1/4 ml-2">
+              Save
+            </Button>
           </div>
-        )}
-        <div className="flex flex-wrap justify-center gap-2">
-          <Button
-            onClick={() => setShowSpecialChars((prev) => !prev)}
-            className="w-full md:w-auto"
-          >
-            {showSpecialChars ? "Hide" : "Show"} Special Characters
-          </Button>
-          {showSpecialChars && (
-            <div className="grid grid-cols-8 gap-2">
-              {specialChars.map((char, index) => (
-                <Button
-                  key={index}
-                  onClick={() => handleAddSpecialChar(char)}
-                  className="w-8 h-8 p-0 flex items-center justify-center bg-white border border-black shadow-md"
-                >
-                  <span className="text-black">{char}</span>
-                </Button>
-              ))}
+
+          {translatedText && (
+            <div className="p-4 rounded-md border border-input bg-background text-foreground">
+              <h2 className="text-lg font-medium mb-2">Translated Text:</h2>
+              <p>{translatedText}</p>
             </div>
           )}
+          <div className="flex flex-wrap justify-center gap-2">
+            <Button
+              onClick={() => setShowSpecialChars((prev) => !prev)}
+              className="w-full md:w-auto"
+            >
+              {showSpecialChars ? "Hide" : "Show"} Special Characters
+            </Button>
+            {showSpecialChars && (
+              <div className="grid grid-cols-8 gap-2">
+                {specialChars.map((char, index) => (
+                  <Button
+                    key={index}
+                    onClick={() => handleAddSpecialChar(char)}
+                    className="w-8 h-8 p-0 flex items-center justify-center bg-white border border-black shadow-md"
+                  >
+                    <span className="text-black">{char}</span>
+                  </Button>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
+      </div>
+
+      {/* footer */}
+      <div className="py-4 w-full ">
+        <footer className=" text-black py-4 px-6">
+          <div className="container mx-auto flex justify-center items-center">
+            <nav>
+              <ul className="flex font-medium space-x-4">
+                <li>
+                  <Link href="#" prefetch={false}>
+                    Terms
+                  </Link>
+                </li>
+                <li>
+                  <Link href="#" prefetch={false}>
+                    Privacy
+                  </Link>
+                </li>
+                <li>
+                  <Link href="#" prefetch={false}>
+                    Contact
+                  </Link>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </footer>
       </div>
     </div>
   );
