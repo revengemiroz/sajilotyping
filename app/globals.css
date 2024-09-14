@@ -79,3 +79,12 @@
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
+
+._ReactTransliterate_1b0d4b {
+  border-radius: 10px !important;
+  overflow: hidden !important;
+}
+
+._Active_1b0d4b {
+  background-color: rgba(0, 0, 0, 0.75) !important;
+}
