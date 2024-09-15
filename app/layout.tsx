@@ -2,6 +2,8 @@ import { Poppins } from "next/font/google";
 import type { Metadata } from "next";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
+import {} from "next/server";
+import Script from "next/script";
 // import "react-transliterate/dist/index.css";
 
 const poppins = Poppins({
@@ -44,6 +46,24 @@ export default function RootLayout({
         </div>
         <Toaster />
       </body>
+
+      <>
+        <Script
+          strategy="lazyOnload"
+          src={`https://www.googletagmanager.com/gtag/js?id=G-ZB5HZTW4N8`}
+        />
+
+        <Script id="" strategy="lazyOnload">
+          {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-ZB5HZTW4N8', {
+              page_path: window.location.pathname,
+              });
+          `}
+        </Script>
+      </>
     </html>
   );
 }
