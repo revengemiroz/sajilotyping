@@ -131,7 +131,7 @@ export default function Component() {
       </nav>
 
       <Timezone />
-      <div className="border-green flex-1 w-full flex items-center justify-center">
+      <div className=" flex-1 w-full flex items-center justify-center">
         <div className=" max-w-md w-full  flex-1 px-6 py-6 border shadow-sm rounded-lg flex flex-col bg-white h-fit space-y-4 ">
           <h1 className="text-3xl font-bold text-foreground tracking-tight">
             Hindi to English Transliteration

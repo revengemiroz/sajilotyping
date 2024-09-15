@@ -50,7 +50,7 @@ function TimeZone() {
   }
 
   return (
-    <div className="border-green w-full md:w-1/5 flex flex-wrap items-center justify-center gap-4">
+    <div className=" w-full md:w-1/5 flex flex-wrap items-center justify-center gap-4">
       <TimeDisplay label="Canada" time={canadaTime} />
       <TimeDisplay label="India" time={indiaTime} />
     </div>
