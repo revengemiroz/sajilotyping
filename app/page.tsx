@@ -13,6 +13,8 @@ import Link from "next/link";
 import { ReactTransliterate } from "react-transliterate";
 import { useToast } from "@/hooks/use-toast";
 
+import Timezone from "./components/TimeZone";
+
 export default function Component() {
   const [inputText, setInputText] = useState("");
   const [translatedText, setTranslatedText] = useState("");
@@ -20,14 +22,6 @@ export default function Component() {
 
   const { toast } = useToast();
 
-  const handleTranslate = () => {
-    const translatedContent = translateHindiToEnglish(inputText);
-    setTranslatedText(translatedContent);
-  };
-  const handleTransliterate = () => {
-    const transliteratedContent = transliterateHindiToEnglish(inputText);
-    setTranslatedText(transliteratedContent);
-  };
   const translateHindiToEnglish = (text) => {
     return "This is the translated English text.";
   };
@@ -132,13 +126,15 @@ export default function Component() {
     <div className="flex flex-col items-center  min-h-screen ">
       <nav className="py-10 w-full flex items-center justify-center">
         <p className="text-foreground/90 font-bold tracking-tight text-4xl">
-          Sajilo Typing
+          Aasan Typing
         </p>
       </nav>
-      <div className="flex-1 w-full flex items-center justify-center">
+
+      <Timezone />
+      <div className="border-green flex-1 w-full flex items-center justify-center">
         <div className=" max-w-md w-full  flex-1 px-6 py-6 border shadow-sm rounded-lg flex flex-col bg-white h-fit space-y-4 ">
           <h1 className="text-3xl font-bold text-foreground tracking-tight">
-            Hindi to English Translator
+            Hindi to English Transliteration
           </h1>
           <ReactTransliterate
             renderComponent={(props) => (

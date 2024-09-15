@@ -2,7 +2,7 @@ import { Poppins } from "next/font/google";
 import type { Metadata } from "next";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
-import {} from "next/server";
+
 import Script from "next/script";
 // import "react-transliterate/dist/index.css";
 
