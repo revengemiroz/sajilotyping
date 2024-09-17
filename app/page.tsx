@@ -14,6 +14,7 @@ import { ReactTransliterate } from "react-transliterate";
 import { useToast } from "@/hooks/use-toast";
 
 import Timezone from "./components/TimeZone";
+import Balancer from "react-wrap-balancer";
 
 export default function Component() {
   const [inputText, setInputText] = useState("");
@@ -133,8 +134,8 @@ export default function Component() {
       <Timezone />
       <div className=" flex-1 w-full flex items-center justify-center">
         <div className=" max-w-md w-full  flex-1 px-6 py-6 border shadow-sm rounded-lg flex flex-col bg-white h-fit space-y-4 ">
-          <h1 className="text-3xl font-bold text-foreground tracking-tight">
-            Hindi to English Transliteration
+          <h1 className="text-3xl font-bold text-foreground tracking-wide">
+            <Balancer>Hindi to English Transliteration</Balancer>
           </h1>
           <ReactTransliterate
             renderComponent={(props) => (
