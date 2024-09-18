@@ -17,7 +17,7 @@ function TimeZone() {
         }
       } catch (error) {
         console.error("Error fetching location:", error);
-        setUserLocation("Unknown");
+        setUserLocation("User Time");
       }
     };
 
