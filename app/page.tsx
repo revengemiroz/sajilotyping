@@ -1,163 +1,156 @@
-/**
- * v0 by Vercel.
- * @see https://v0.dev/t/6AosZSQbU1f
- * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
- */
 "use client";
 
 import { useEffect, useState } from "react";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ReactTransliterate } from "react-transliterate";
 import { useToast } from "@/hooks/use-toast";
-
 import Timezone from "./components/TimeZone";
 import Balancer from "react-wrap-balancer";
+
+// Special characters list, moved outside of the component to avoid re-declaration
+const specialChars = [
+  "ँ",
+  "ं",
+  "ः",
+  "अ",
+  "आ",
+  "इ",
+  "ई",
+  "उ",
+  "ऊ",
+  "ऋ",
+  "ऌ",
+  "ऍ",
+  "ऎ",
+  "ए",
+  "ऐ",
+  "ऑ",
+  "ऒ",
+  "ओ",
+  "औ",
+  "क",
+  "ख",
+  "ग",
+  "घ",
+  "ङ",
+  "च",
+  "छ",
+  "ज",
+  "झ",
+  "ञ",
+  "ट",
+  "ठ",
+  "ड",
+  "ढ",
+  "ण",
+  "त",
+  "थ",
+  "द",
+  "ध",
+  "न",
+  "प",
+  "फ",
+  "ब",
+  "भ",
+  "म",
+  "य",
+  "र",
+  "ल",
+  "व",
+  "श",
+  "ष",
+  "स",
+  "ह",
+];
 
 export default function Component() {
   const [inputText, setInputText] = useState("");
   const [translatedText, setTranslatedText] = useState("");
   const [showSpecialChars, setShowSpecialChars] = useState(false);
-
   const { toast } = useToast();
 
-  const translateHindiToEnglish = (text) => {
-    return "This is the translated English text.";
-  };
-  const transliterateHindiToEnglish = (text) => {
-    return "This is the transliterated English text.";
-  };
+  // Copy to clipboard functionality
   const handleCopyToClipboard = () => {
-    navigator.clipboard.writeText(translatedText);
-    toast({
-      description: "Copied to clipboard",
-      className: "font-medium w-fit m-auto",
-    });
+    if (translatedText) {
+      navigator.clipboard.writeText(translatedText);
+      toast({
+        description: "Copied to clipboard",
+        className: "font-medium w-fit m-auto",
+      });
+    }
   };
+
+  // Save to file functionality
   const handleSaveToFile = () => {
-    const element = document.createElement("a");
-    const file = new Blob([translatedText], { type: "text/plain" });
-    element.href = URL.createObjectURL(file);
-    element.download = "translated_text.txt";
-    document.body.appendChild(element);
-    element.click();
-    document.body.removeChild(element);
+    if (translatedText) {
+      const element = document.createElement("a");
+      const file = new Blob([translatedText], { type: "text/plain" });
+      element.href = URL.createObjectURL(file);
+      element.download = "translated_text.txt";
+      document.body.appendChild(element);
+      element.click();
+      document.body.removeChild(element);
+    }
   };
-  const specialChars = [
-    "ँ",
-    "ं",
-    "ः",
-    "अ",
-    "आ",
-    "इ",
-    "ई",
-    "उ",
-    "ऊ",
-    "ऋ",
-    "ऌ",
-    "ऍ",
-    "ऎ",
-    "ए",
-    "ऐ",
-    "ऑ",
-    "ऒ",
-    "ओ",
-    "औ",
-    "क",
-    "ख",
-    "ग",
-    "घ",
-    "ङ",
-    "च",
-    "छ",
-    "ज",
-    "झ",
-    "ञ",
-    "ट",
-    "ठ",
-    "ड",
-    "ढ",
-    "ण",
-    "त",
-    "थ",
-    "द",
-    "ध",
-    "न",
-    "प",
-    "फ",
-    "ब",
-    "भ",
-    "म",
-    "य",
-    "र",
-    "ल",
-    "व",
-    "श",
-    "ष",
-    "स",
-    "ह",
-  ];
+
+  // Adding special character to input text and updating both inputText and translatedText
   const handleAddSpecialChar = (char) => {
     setInputText((prevText) => prevText + char);
+    setTranslatedText((prevText) => prevText + char);
   };
 
+  // Apply a background color to list items
   useEffect(() => {
-    // Grab all <ul> elements
-    const ulElements = document.querySelectorAll("ul");
-    console.log({ ulElements });
-
-    // Grab all <li> elements
     const liElements = document.querySelectorAll("li");
-
-    // Do something with all the <ul> elements (e.g., log them)
-    ulElements.forEach((ul, index) => {
-      console.log(`UL ${index}:`, ul);
+    liElements.forEach((li) => {
+      li.style.backgroundColor = "#f0f0f0";
     });
-
-    // Do something with all the <li> elements (e.g., change their background color)
-    liElements.forEach((li, index) => {
-      console.log(`LI ${index}:`, li);
-      li.style.backgroundColor = "#f0f0f0"; // Set a light grey background color
-    });
-  }, [inputText]); // Runs only once after the component mounts
+  }, [inputText]);
 
   return (
-    <div className="flex flex-col items-center  min-h-screen ">
-      <nav className="py-10 w-full flex items-center justify-center">
-        <p className="text-foreground/90 font-bold tracking-tight text-4xl">
+    <div className="flex flex-col items-center min-h-screen px-4">
+      <nav className="py-6 w-full flex items-center justify-center">
+        <p className="text-foreground/90 font-bold tracking-tight text-3xl md:text-4xl">
           Aasan Typing
         </p>
       </nav>
 
+      {/* Timezone Component */}
       <Timezone />
-      <div className=" flex-1 w-full flex items-center justify-center">
-        <div className=" max-w-md w-full  flex-1 px-6 py-6 border shadow-sm rounded-lg flex flex-col bg-white h-fit space-y-4 ">
-          <h1 className="text-3xl font-bold text-foreground tracking-wide">
+
+      <div className="flex-1 w-full flex items-center justify-center">
+        <div className="max-w-md w-full flex-1 px-4 py-6 border shadow-sm rounded-lg flex flex-col bg-white space-y-4">
+          <h1 className="text-2xl md:text-3xl font-bold text-foreground tracking-wide text-center">
             <Balancer>Hindi to English Transliteration</Balancer>
           </h1>
+
+          {/* Text Input for Transliteration */}
           <ReactTransliterate
             renderComponent={(props) => (
               <Textarea
                 value={inputText}
-                // onChange={(e) => setInputText(e.target.value)}
+                onChange={(e) => {
+                  setInputText(e.target.value);
+                  setTranslatedText(e.target.value); // Keep both texts in sync
+                }}
                 placeholder="Enter Hindi text here"
-                className="w-full p-4 rounded-md border border-input bg-background text-foreground"
+                className="w-full p-4 rounded-md text-base border border-input bg-background text-foreground"
                 rows={5}
                 {...props}
               />
             )}
             value={translatedText}
-            onChangeText={(text) => {
-              setTranslatedText(text);
-            }}
+            onChangeText={setTranslatedText}
             lang={"hi"}
           />
+
+          {/* Action Buttons */}
           <div className="flex flex-col md:flex-row gap-2 justify-between">
             <Button
               onClick={handleCopyToClipboard}
-              disabled={translatedText.length === 0}
+              disabled={!translatedText}
               className="w-full mb-2 md:mb-0"
             >
               <svg
@@ -167,9 +160,9 @@ export default function Component() {
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 className="lucide lucide-copy mr-3"
               >
                 <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
@@ -177,9 +170,10 @@ export default function Component() {
               </svg>
               Copy
             </Button>
+
             <Button
               onClick={handleSaveToFile}
-              disabled={translatedText.length === 0}
+              disabled={!translatedText}
               className="w-full"
             >
               <svg
@@ -189,9 +183,9 @@ export default function Component() {
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 className="lucide lucide-arrow-down-to-line"
               >
                 <path d="M12 17V3" />
@@ -201,10 +195,12 @@ export default function Component() {
               <span className="ml-2">Save</span>
             </Button>
           </div>
+
+          {/* Special Characters Section */}
           <div className="flex flex-wrap justify-center gap-2">
             <Button
-              onClick={() => setShowSpecialChars((prev) => !prev)}
-              className="w-full "
+              onClick={() => setShowSpecialChars(!showSpecialChars)}
+              className="w-full"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -213,9 +209,9 @@ export default function Component() {
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 className="lucide lucide-spell-check mr-3"
               >
                 <path d="m6 16 6-12 6 12"></path>
@@ -225,12 +221,12 @@ export default function Component() {
               {showSpecialChars ? "Hide" : "Show"} Special Characters
             </Button>
             {showSpecialChars && (
-              <div className="grid grid-cols-8 gap-2">
+              <div className="grid grid-cols-4 md:grid-cols-8 gap-2">
                 {specialChars.map((char, index) => (
                   <Button
                     key={index}
                     onClick={() => handleAddSpecialChar(char)}
-                    className="w-8 h-8 p-0 flex items-center justify-center bg-white border border-black shadow-md"
+                    className="w-8 h-8 p-0 flex hover:bg-gray-400 transition-all hover:scale-110 items-center justify-center bg-white border border-black shadow-md"
                   >
                     <span className="text-black">{char}</span>
                   </Button>
@@ -241,32 +237,30 @@ export default function Component() {
         </div>
       </div>
 
-      {/* footer */}
-      <div className="py-4 w-full ">
-        <footer className=" text-black py-4 px-6">
-          <div className="container mx-auto flex justify-center items-center">
-            <nav>
-              <ul className="flex font-medium space-x-4">
-                <li>
-                  <Link href="#" prefetch={false}>
-                    Terms
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" prefetch={false}>
-                    Privacy
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" prefetch={false}>
-                    Contact
-                  </Link>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </footer>
-      </div>
+      {/* Footer */}
+      <footer className="py-4 w-full text-black px-6">
+        <div className="container mx-auto flex justify-center items-center">
+          <nav>
+            <ul className="flex font-medium space-x-4">
+              <li>
+                <Link href="#" prefetch={false}>
+                  Terms
+                </Link>
+              </li>
+              <li>
+                <Link href="#" prefetch={false}>
+                  Privacy
+                </Link>
+              </li>
+              <li>
+                <Link href="#" prefetch={false}>
+                  Contact
+                </Link>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </footer>
     </div>
   );
 }
