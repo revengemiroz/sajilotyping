@@ -4,6 +4,7 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 
 import Script from "next/script";
+import Head from "next/head";
 // import "react-transliterate/dist/index.css";
 
 const poppins = Poppins({
@@ -12,9 +13,9 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Sajilo Typing",
+  title: "Hindi Typing",
   description:
-    "Translate hindi to english which you can download and copy to clipboard.",
+    "Easily transliterate English text to Hindi with our user-friendly tool. Perfect for students, travelers, and anyone looking to bridge the language gap. Experience seamless English to Hindi transliteration today!",
 };
 
 export default function RootLayout({
@@ -24,6 +25,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <Head>
+        <title>English to Hindi Transliteration</title>
+        <meta
+          name="description"
+          content="Easily transliterate English text to Hindi with our user-friendly tool. Perfect for students, travelers, and anyone looking to bridge the language gap. Experience seamless English to Hindi transliteration today!"
+        />
+        <meta
+          name="keywords"
+          content="transliteration, English to Hindi, language translation, Hindi typing, learn Hindi"
+        />
+        <meta name="author" content="Your Name or Your Company Name" />
+      </Head>
       <body className={`${poppins.className} antialiased`}>
         <div className="min-h-screen w-full relative">
           {children}

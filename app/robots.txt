@@ -1,0 +1,6 @@
+# Allow all crawlers access to everything
+User-agent: *
+Disallow: 
+
+# Sitemap
+Sitemap: https://www.typing-hindi.com/sitemap.xml
