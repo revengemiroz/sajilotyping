@@ -221,7 +221,7 @@ export default function Component() {
               {showSpecialChars ? "Hide" : "Show"} Special Characters
             </Button>
             {showSpecialChars && (
-              <div className="grid grid-cols-4 md:grid-cols-8 gap-2">
+              <div className="grid grid-cols-8  md:grid-cols-8 gap-2">
                 {specialChars.map((char, index) => (
                   <Button
                     key={index}
