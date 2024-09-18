@@ -1,19 +1,38 @@
 import React, { useEffect, useState } from "react";
 
 function TimeZone() {
-  const [canadaTime, setCanadaTime] = useState(new Date());
+  const [localTime, setLocalTime] = useState(new Date());
   const [indiaTime, setIndiaTime] = useState(new Date());
+  const [userLocation, setUserLocation] = useState("Loading...");
   const [timeDifference, setTimeDifference] = useState("");
 
   useEffect(() => {
+    // Fetch user's location based on IP address
+    const fetchLocation = async () => {
+      try {
+        const response = await fetch("http://ip-api.com/json/");
+        const data = await response.json();
+        if (data.status === "success") {
+          setUserLocation(data.country); // Set the country name
+        }
+      } catch (error) {
+        console.error("Error fetching location:", error);
+        setUserLocation("Unknown");
+      }
+    };
+
+    fetchLocation();
+
     const timer = setInterval(() => {
       const now = new Date();
 
-      // Set Canada time (assuming Eastern Time)
-      const canadaDate = new Date(
-        now.toLocaleString("en-US", { timeZone: "America/Toronto" })
+      // Set local time
+      const localDate = new Date(
+        now.toLocaleString("en-US", {
+          timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        })
       );
-      setCanadaTime(canadaDate);
+      setLocalTime(localDate);
 
       // Set India time
       const indiaDate = new Date(
@@ -23,7 +42,7 @@ function TimeZone() {
 
       // Calculate time difference
       const diff =
-        (indiaDate.getTime() - canadaDate.getTime()) / (1000 * 60 * 60);
+        (indiaDate.getTime() - localDate.getTime()) / (1000 * 60 * 60);
       setTimeDifference(
         `${Math.abs(diff)} hours ${diff > 0 ? "ahead" : "behind"}`
       );
@@ -39,9 +58,9 @@ function TimeZone() {
         <div className="bg-white p-2 rounded-md shadow-inner border border-gray-200">
           <span className="text-xl font-mono" suppressHydrationWarning>
             {time.toLocaleTimeString([], {
-              hour: "2-digit",
+              hour: "numeric",
               minute: "2-digit",
-              second: "2-digit",
+              hour12: true, // Use 12-hour format
             })}
           </span>
         </div>
@@ -50,8 +69,8 @@ function TimeZone() {
   }
 
   return (
-    <div className=" w-full md:w-1/5 flex flex-wrap items-center justify-center gap-4">
-      <TimeDisplay label="Canada" time={canadaTime} />
+    <div className="w-full md:w-1/5 flex flex-wrap items-center justify-center gap-4">
+      <TimeDisplay label={userLocation} time={localTime} />
       <TimeDisplay label="India" time={indiaTime} />
     </div>
   );
