@@ -16,6 +16,8 @@ export const metadata: Metadata = {
   title: "Hindi Typing",
   description:
     "Easily transliterate English text to Hindi with our user-friendly tool. Perfect for students, travelers, and anyone looking to bridge the language gap. Experience seamless English to Hindi transliteration today!",
+  keywords:
+    "Hindi Transliteration, English to Hindi Typing, Online Hindi Typing Tool, Free Hindi Transliteration, Type Hindi Online, Romanized Hindi Typing, Google Hindi Typing Tool, Instant Hindi Typing, Convert English to Hindi",
 };
 
 export default function RootLayout({
