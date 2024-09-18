@@ -243,20 +243,16 @@ export default function Component() {
           <nav>
             <ul className="flex font-medium space-x-4">
               <li>
-                <Link href="#" prefetch={false}>
-                  Terms
+                <Link href="/how-it-works" prefetch={false}>
+                  How it works
                 </Link>
               </li>
-              <li>
-                <Link href="#" prefetch={false}>
-                  Privacy
-                </Link>
-              </li>
-              <li>
+
+              {/* <li>
                 <Link href="#" prefetch={false}>
                   Contact
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </nav>
         </div>
