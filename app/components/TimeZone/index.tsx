@@ -10,7 +10,7 @@ function TimeZone() {
     // Fetch user's location based on IP address
     const fetchLocation = async () => {
       try {
-        const response = await fetch("http://ip-api.com/json/");
+        const response = await fetch("http://ip-api.com/json/24.48.0.1");
         const data = await response.json();
         if (data.status === "success") {
           setUserLocation(data.country); // Set the country name
