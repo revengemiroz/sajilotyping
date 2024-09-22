@@ -38,6 +38,10 @@ export default function RootLayout({
           content="transliteration, English to Hindi, language translation, Hindi typing, learn Hindi"
         />
         <meta name="author" content="Your Name or Your Company Name" />
+        <meta
+          name="google-adsense-account"
+          content="ca-pub-3843144567571433"
+        ></meta>
       </Head>
       <body className={`${poppins.className} antialiased`}>
         <div className="min-h-screen w-full relative">
