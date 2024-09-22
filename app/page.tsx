@@ -113,7 +113,7 @@ export default function Component() {
     <div className="flex flex-col items-center min-h-screen px-4">
       <nav className="py-6 w-full flex items-center justify-center">
         <p className="text-foreground/90 font-bold tracking-tight text-3xl md:text-4xl">
-          Aasan Typings
+          Aasan Typing
         </p>
       </nav>
 
