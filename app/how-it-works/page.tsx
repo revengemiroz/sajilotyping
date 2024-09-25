@@ -7,9 +7,9 @@ import { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Hindi Typing | How It Works",
+  title: "Typing Hindi - Hindi Typing | How It Works",
   description:
-    "Easily transliterate English text to Hindi with our user-friendly tool. Perfect for students, travelers, and anyone looking to bridge the language gap. Experience seamless English to Hindi transliteration today! Learn how it works",
+    "Transliterate English to Hindi effortlessly with our easy-to-use tool. Ideal for students and travelers. Try it now for seamless language conversion!",
 };
 
 export default function Component() {
@@ -60,6 +60,7 @@ export default function Component() {
             </div>
             <div className="flex justify-center">
               <Link
+                title="Try It Now"
                 href="/"
                 className="inline-flex items-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-sm transition-colors hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
                 prefetch={false}

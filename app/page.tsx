@@ -243,7 +243,11 @@ export default function Component() {
           <nav>
             <ul className="flex font-medium space-x-4">
               <li>
-                <Link href="/how-it-works" prefetch={false}>
+                <Link
+                  title="How it works"
+                  href="/how-it-works"
+                  prefetch={false}
+                >
                   How it works
                 </Link>
               </li>

@@ -13,9 +13,9 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Hindi Typing",
+  title: "Typing Hindi - Hindi Typing Made Easy and Fast",
   description:
-    "Easily transliterate English text to Hindi with our user-friendly tool. Perfect for students, travelers, and anyone looking to bridge the language gap. Experience seamless English to Hindi transliteration today!",
+    "Transliterate English to Hindi effortlessly with our user-friendly tool. Ideal for students and travelers. Overcome language barriers seamlessly!",
   keywords:
     "Hindi Transliteration, English to Hindi Typing, Online Hindi Typing Tool, Free Hindi Transliteration, Type Hindi Online, Romanized Hindi Typing, Google Hindi Typing Tool, Instant Hindi Typing, Convert English to Hindi",
 };
@@ -42,6 +42,7 @@ export default function RootLayout({
           name="google-adsense-account"
           content="ca-pub-3843144567571433"
         ></meta>
+        <meta property="og:type" content="Hindi Typing" />
       </Head>
       <body className={`${poppins.className} antialiased`}>
         <div className="min-h-screen w-full relative">
